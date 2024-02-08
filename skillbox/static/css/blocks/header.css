@@ -1,0 +1,23 @@
+.header{
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+.haeder__wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 42px;
+    margin-bottom: 37px ;
+}
+.header-nav__list{
+    display: flex;
+    gap: 24px;
+
+}
+.header-nav__link{
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

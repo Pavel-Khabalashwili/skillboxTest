@@ -1,0 +1,18 @@
+<div class="logo">
+    <p>SKILLBOX_TEST</p>
+</div>
+
+<div class="header-nav">
+    <ul class="header-nav__list">
+        <li class="header-nav__item"><a href="{% url "shop:products-list" %}" class="header-nav__link">Продукты</a></li>
+        <li class="header-nav__item"><a href="{% url "shop:order-detail" %}" class="header-nav__link">Корзина</a></li>
+        <li class="header-nav__item"><a href="{% url "shop:import"%} " class="header-nav__link">CSV</a></li>
+        <li class="header-nav__item"><a href="{% url "shop:api-root"%} " class="header-nav__link">API</a></li>
+        {% if user.is_authenticated %}
+            <li class="header-nav__item"><a href="{% url "authentication:logout" %}" class="header-nav__link">Выйти</a></li>
+        {% else %}
+            <li class="header-nav__item"><a href="{% url "register:register" %}" class="header-nav__link">Регистрация</a></li>
+            <li class="header-nav__item"><a href="{% url "authentication:authentication" %}" class="header-nav__link">Вход</a></li>
+        {% endif %}
+    </ul>
+</div>

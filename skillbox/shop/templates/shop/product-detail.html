@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'shop/css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blocks/header.css' %}">
+{% endblock %}
+
+{% block nav %}
+    {% include "blocks\nav.html" %}
+{% endblock nav %}
+
+{% block main %}
+    <section class = "products">
+        <div class="container">
+            <h1 class = "products__title">Товар: {{ product.name }} </h1>
+
+            <div class = "products__list">
+                    <div  class = "products__item">
+                        <p class = "section-descr product__deskr">Имя : {{ product.name }}</p>
+                        <p class = "section-descr product__deskr">Артикул : {{ product.sku }} </p>
+                        <p class = "section-descr product__deskr">Категория : {{ product.category }} </p>
+                        <p class = "section-descr product__deskr">Кол-во на складе : {{ product.quantity }} </p>
+                        <p class = "section-descr product__deskr">Цена : {{ product.price }} </p>
+
+                        {% if  product.quantity != 0 %}
+                            <form method="post" class="form-add">
+                                {% csrf_token %}
+                                <div class="form-add__wrapper">
+                                    <label for="quantity">Выберите количество:</label>
+                                    <input type="number" id="quantity" name="quantity" class = "quantity" value="1" min="1" max="{{ product.quantity }}">
+                                </div>
+                                <form method="post" class="form-add">
+                                    {% csrf_token %}
+                                    <button class="form__btn btn" type="submit">Добавить в корзину</button>
+                                </form>
+                            </form>
+                        {% else %}
+                        <h2 class = "products__title">Товара нет в наличии</h2>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    
+    
+{% endblock %}

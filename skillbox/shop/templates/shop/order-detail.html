@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {{ order.user }}
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'shop/css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blocks/header.css' %}">
+{% endblock %}
+
+{% block nav %}
+    {% include "blocks\nav.html" %}
+{% endblock nav %}
+
+{% block main %}
+    <section class = "products">
+        <div class="container">
+            {% if order %}
+                <h1 class = "products__title"> Получатель: {% firstof order.user.first_name order.user.username  %} </h1>
+                <h2 class = "products__title"> Заказ : </h2>
+                <div class = "products__list">
+                        <div  class = "products__item">
+                            
+                            {% for item in order_items %}
+                                <p class="section-descr product__deskr">
+                                    {{ item.product.name }} - {{ item.quantity }}  (<strong>{{ item.total_price }}$</strong>)
+                                </p>
+                            {% endfor %}
+                                <p class="section-descr product__deskr">Итого :  <strong>{{ total_price }}$</strong></p>
+                            <form method="post" class="form-add" action="{% url 'shop:buy-product' %}">
+                                {% csrf_token %}
+                                <button class="form__btn btn"  type="submit">Купить</button>
+                            </form>
+                        </div>
+                </div>
+                {% else %}
+                <h1 class = "products__title">Ваша корзина пуста</h1>
+            {% endif %}
+            
+        </div>
+    </section>
+{% endblock %}

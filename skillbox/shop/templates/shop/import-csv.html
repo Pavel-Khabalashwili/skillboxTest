@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {{ order.user }}
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'shop/css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blocks/header.css' %}">
+{% endblock %}
+
+{% block nav %}
+    {% include "blocks\nav.html" %}
+{% endblock nav %}
+
+{% block main %}
+   
+
+    <section class = "products">
+        <div class="container">
+            <h1 class = "products__title">Импорт CSV</h1>
+                <div class = "products__list">
+                    <div class="products__item">
+                        <form method="post" enctype="multipart/form-data" class="log-form">
+                            {% csrf_token %}
+                            <h1 class="log-form__title h2">Импорт CSV</h1>
+                            {{ form.as_p }}
+                            <button class="log-form__btn btn" type="submit">Загрузить CSV файл</button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </section>
+{% endblock %}

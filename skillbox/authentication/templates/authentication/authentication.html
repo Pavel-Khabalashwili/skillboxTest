@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Authentication{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'authentication/css/authentication.css' %}">
+{% endblock %}
+
+{% block main %}
+    <form method="post" class="log-form">
+        {% csrf_token %}
+        <h1 class="log-form__title h2">Аутентификация</h1>
+        <input name="username" class="log-form__input section-descr" type="text" placeholder="Логин">
+        <input name="password" class="log-form__input section-descr" type="password" placeholder="Пароль">
+        <button class="log-form__btn btn" type="submit">Вход</button>
+        {% if otp_required %}
+            <label for="otp_code">Введите OTP код:</label>
+            <input type="text" id="otp_code" name="otp_code">
+            <button type="submit">Отправить</button>
+        {% else %}
+            <a style="margin-top: 1em;" href="{% url 'register:register' %}" class="log-form__title h2">Регистрация</a>
+        {% endif %}
+    </form>
+{% endblock %}
